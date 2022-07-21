@@ -6,23 +6,34 @@
 
 *******************************************************************/
 
-#ifndef _controller_h_
-#define _controller_h_
+#ifndef _shutter_h_
+#define _shutter_h_
 
-#include "enums.h"
+#include "motorController.h"
 
-#if MOTOR_CONTROLLER == BTS7960
-#include "BTS7960Controller.h"
-#endif
+// Lid states
+enum State {
+    ST_CLOSED,
+    ST_OPENING,
+    ST_OPEN,
+    ST_CLOSING,
+    ST_ABORTED,
+    ST_ERROR,
+};
 
-// Define a pointer to a function for checking controller/flap
-// typedef bool (*interFn)(State st);
 
-class Controller {
+enum Action {
+    DO_NONE,
+    DO_OPEN,
+    DO_CLOSE,
+    DO_ABORT,
+};
+
+class Shutter {
 public:
-    Controller(Motor *motor, int homedSwitch, unsigned long timeout);
-    void cw();
-    void ccw();
+    Shutter(Motor *motor, int closedSwitch, int openSwitch, unsigned long timeout);
+    void open();
+    void close();
     void abort();
     void update();
     State getState();
@@ -32,7 +43,8 @@ private:
     State state;
     Action nextAction;
     unsigned long runTimeout;
-    int swHomed;
+    int swClosed;
+    int swOpen;
 };
 
 #endif

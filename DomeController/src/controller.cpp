@@ -12,7 +12,7 @@
 
 #define MOTOR_CW 0
 #define MOTOR_CCW 1
-#define SPEED 1023
+#define SPEED 254
 #define DEFAULT_TIMEOUT 30000 // controller timeout (in ms)
 
 // Controller constructor.
@@ -114,7 +114,7 @@ void Controller::update()
             digitalWrite(LED_BUILTIN, LOW);  // turn the LED off by making the voltage LOW
             delay(200);                      // wait for a second
         }
-        motor->run(MOTOR_CW, SPEED);
+        motor->run(MOTOR_CW, 100);
         if (action == DO_ABORT || action == DO_CCW)
         {
             state = ST_ABORTED;
@@ -127,7 +127,7 @@ void Controller::update()
         }
         break;
     case ST_CCWING:
-        motor->run(MOTOR_CCW, SPEED);
+        motor->run(MOTOR_CCW, 100);
         if (action == DO_ABORT || action == DO_CW)
         {
             state = ST_ABORTED;

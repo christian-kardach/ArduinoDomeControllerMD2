@@ -42,7 +42,6 @@ int SerialCommand::addCommand(const uint8_t id, uint8_t size, cbFunction functio
 
 void SerialCommand::readSerial()
 {
-    
     while (Serial.available()) {
         char c = Serial.read();
         switch (bufPos) {
@@ -73,11 +72,8 @@ void SerialCommand::readSerial()
             }
             break;
         }
-        
-        buffer[bufPos++] = c;
 
-        //String str = (char*)buffer;
-        //Serial.println(str);
+        buffer[bufPos++] = c;
 
         if (bufPos == cmdSize + 2) {
             //TODO: check CRC
