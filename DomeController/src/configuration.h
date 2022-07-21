@@ -5,10 +5,6 @@
 /*
 0   HC12_RX
 1   HC12_TX
-7   Motor L Enable
-8   Motor R Enable
-9   Motor L PWM
-10  Motor R PWM
 13  Home Probe
 2  AZ Encoder
 3  AZ Encoder

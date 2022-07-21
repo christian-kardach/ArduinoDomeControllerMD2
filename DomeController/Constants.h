@@ -1,3 +1,5 @@
+#pragma once
+
 // AVR based boards
 #define BOARD_AVR_UNO 0001
 
