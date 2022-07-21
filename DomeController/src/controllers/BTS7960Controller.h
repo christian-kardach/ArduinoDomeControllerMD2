@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include "configuration.h"
 
+namespace BTS7960
+{
 class BTS7960
 {
   public:
@@ -40,3 +42,4 @@ class Motor
     uint8_t _nmotor;
     BTS7960 *motorController;
 };
+}

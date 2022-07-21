@@ -1,16 +1,15 @@
 //#define MOTOR_CONTROLLER BTS7960
 #define MOTOR_CONTROLLER MOTOR_CONTROLLER_BTS7960
 
-#if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
+// BTS7960
     #define MOTOR_L_EN  7
     #define MOTOR_R_EN  8
     #define MOTOR_L_PWM 9
     #define MOTOR_R_PWM 10
-#endif
-#if MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
+
+// SHEILDMD10
     #define MOTOR_PWM 3
     #define MOTOR_DIR 2
-#endif
 
 // Configuration
 // #define HAS_SHUTTER     // Uncomment if the shutter controller is available

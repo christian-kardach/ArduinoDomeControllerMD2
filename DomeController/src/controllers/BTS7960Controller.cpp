@@ -1,5 +1,7 @@
 #include "BTS7960Controller.h"
 
+namespace BTS7960
+{
 BTS7960::BTS7960(uint8_t L_EN, uint8_t R_EN, uint8_t L_PWM, uint8_t R_PWM)
 {
     _R_PWM = R_PWM;
@@ -102,4 +104,5 @@ bool Motor::isRunning()
 int Motor::readCurrent()
 {
     return 0;
+}
 }

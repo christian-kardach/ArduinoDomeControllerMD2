@@ -24,7 +24,11 @@
 class Controller
 {
   public:
-    Controller(Motor *motor, int homedSwitch, unsigned long timeout);
+  #if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
+    Controller(BTS7960::Motor *motor, int homedSwitch, unsigned long timeout);
+  #elif MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
+    Controller(SHIELDMD10::Motor *motor, int homedSwitch, unsigned long timeout);
+  #endif
     void cw();
     void ccw();
     void abort();
@@ -33,7 +37,12 @@ class Controller
 
   private:
     void initState();
-    Motor *motor;
+    
+    #if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
+    BTS7960::Motor *motor;
+    #elif MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
+    SHIELDMD10::Motor *motor;
+    #endif
     State state;
     Action nextAction;
     unsigned long runTimeout;

@@ -19,7 +19,8 @@
 // motor: pointer to an instance of Motor
 // sw1: Home sensor (Hall Effect)
 
-Controller::Controller(Motor *motorPtr, int homedSwitch, unsigned long timeout)
+#if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
+Controller::Controller(BTS7960::Motor *motorPtr, int homedSwitch, unsigned long timeout)
 {
     motor      = motorPtr;
     swHomed    = homedSwitch;  // normally open - should have a value of 1 when homed
@@ -27,6 +28,17 @@ Controller::Controller(Motor *motorPtr, int homedSwitch, unsigned long timeout)
     nextAction = DO_NONE;
     initState();
 }
+
+#elif MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
+Controller::Controller(SHIELDMD10::Motor *motorPtr, int homedSwitch, unsigned long timeout)
+{
+    motor      = motorPtr;
+    swHomed    = homedSwitch;  // normally open - should have a value of 1 when homed
+    runTimeout = timeout;
+    nextAction = DO_NONE;
+    initState();
+}
+#endif
 
 void Controller::initState()
 {

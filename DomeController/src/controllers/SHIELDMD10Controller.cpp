@@ -1,5 +1,7 @@
 #include "SHIELDMD10Controller.h"
 
+namespace SHIELDMD10
+{
 SHIELDMD10::SHIELDMD10(uint8_t PWM, uint8_t DIR)
 {
     _PWM = PWM;
@@ -32,9 +34,7 @@ Motor::Motor(uint8_t n)
 
 void Motor::setup()
 {
-    #if MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
     motorController = new SHIELDMD10(MOTOR_DIR, MOTOR_PWM);
-    #endif
 }
 
 void Motor::run(int dir, int pwm)  // dir is 0 or 1
@@ -78,3 +78,4 @@ int Motor::readCurrent()
 {
     return 0;
 }
+}  // namespace SHIELDMD10

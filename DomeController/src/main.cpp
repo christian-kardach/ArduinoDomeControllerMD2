@@ -94,7 +94,11 @@ SoftwareSerial ttl(4, 5);
 SerialCommand sCmd;
 
 #ifdef MOTOR_SHIELD
-Motor motor(0);
+    #if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
+        BTS7960::Motor motor(0);
+    #elif MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
+        SHIELDMD10::Motor motor(0);
+    #endif
 #endif
 
 bool park_on_shutter    = false;

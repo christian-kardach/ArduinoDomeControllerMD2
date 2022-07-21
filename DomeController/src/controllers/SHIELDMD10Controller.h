@@ -2,7 +2,8 @@
 
 #include "configuration.h"
 #include <Arduino.h>
-
+namespace SHIELDMD10
+{
 class SHIELDMD10
 {
   public:
@@ -32,3 +33,4 @@ class Motor
     uint8_t _nmotor;
     SHIELDMD10 *motorController;
 };
+}
