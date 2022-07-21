@@ -46,7 +46,8 @@ enum ShutterStatus
 };
 
 // States
-enum State {
+enum State
+{
     ST_HOMED,
     ST_NOTHOMED,
     ST_CW,
@@ -57,8 +58,8 @@ enum State {
     ST_ERROR,
 };
 
-
-enum Action {
+enum Action
+{
     DO_NONE,
     DO_CW,
     DO_CCW,
