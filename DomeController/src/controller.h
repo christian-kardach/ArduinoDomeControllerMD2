@@ -10,11 +10,11 @@
 #define _controller_h_
 
 #include "enums.h"
+#include "configuration.h"
 
-#if MOTOR_CONTROLLER == BTS7960
+#if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
     #include "BTS7960Controller.h"
-#endif
-#if MOTOR_CONTROLLER == SHIELDMD10
+#elif MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
     #include "SHIELDMD10Controller.h"
 #endif
 

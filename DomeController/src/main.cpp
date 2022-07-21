@@ -31,8 +31,10 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 #include <SoftwareSerial.h>
 #include "configuration.h"
 
-#if MOTOR_CONTROLLER == BTS7960
+#if MOTOR_CONTROLLER == MOTOR_CONTROLLER_BTS7960
     #include "BTS7960Controller.h"
+#elif MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
+    #include "SHIELDMD10Controller.h"
 #endif
 
 #include "serialCommand.h"
