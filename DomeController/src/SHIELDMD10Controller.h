@@ -6,17 +6,12 @@
 class SHIELDMD10
 {
   public:
-    SHIELDMD10(uint8_t PWM, uint8_t DIR) : SHIELDMD10(PWM, DIR)
-    {
-    }
     SHIELDMD10(uint8_t PWM, uint8_t DIR);
-
     void TurnLeft(uint8_t pwm);
     void TurnRight(uint8_t pwm);
     void Stop();
 
   private:
-    uint8_t _EN;
     uint8_t _DIR;
     uint8_t _PWM;
 };
