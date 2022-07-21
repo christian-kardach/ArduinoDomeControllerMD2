@@ -14,7 +14,7 @@ A5  Battery Voltage Reading
 */
 
 #include "../Constants.h"
-#include "../Configuration_local.h"
+#include "../Configuration_local.hpp"
 
 // Message Destination
 #define TO_MAXDOME  0x00

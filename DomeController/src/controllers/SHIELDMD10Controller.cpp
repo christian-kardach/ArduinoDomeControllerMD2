@@ -32,7 +32,9 @@ Motor::Motor(uint8_t n)
 
 void Motor::setup()
 {
+    #if MOTOR_CONTROLLER == MOTOR_CONTROLLER_SHIELDMD10
     motorController = new SHIELDMD10(MOTOR_DIR, MOTOR_PWM);
+    #endif
 }
 
 void Motor::run(int dir, int pwm)  // dir is 0 or 1
