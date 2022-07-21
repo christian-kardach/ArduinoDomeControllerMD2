@@ -9,19 +9,19 @@
 #include <Arduino.h>
 #include "serialCommand.h"
 
-
 SerialCommand::SerialCommand()
 {
     nCommands = 0;
-    cmdSize = 0;
-    bufPos = 0;
+    cmdSize   = 0;
+    bufPos    = 0;
 }
 
 uint8_t SerialCommand::getCRC(uint8_t *cmd, uint8_t length)
 {
     char crc = 0;
 
-    for (int i=1; i<=length; i++) {
+    for (int i = 1; i <= length; i++)
+    {
         crc -= cmd[i];
     }
     return crc;
@@ -29,12 +29,13 @@ uint8_t SerialCommand::getCRC(uint8_t *cmd, uint8_t length)
 
 int SerialCommand::addCommand(const uint8_t id, uint8_t size, cbFunction function)
 {
-    if (nCommands >= MAX_COMMANDS) {
+    if (nCommands >= MAX_COMMANDS)
+    {
         return 1;
     }
 
-    commandList[nCommands].id = id;
-    commandList[nCommands].size = size;
+    commandList[nCommands].id       = id;
+    commandList[nCommands].size     = size;
     commandList[nCommands].function = function;
     nCommands++;
     return 0;
@@ -42,44 +43,49 @@ int SerialCommand::addCommand(const uint8_t id, uint8_t size, cbFunction functio
 
 void SerialCommand::readSerial()
 {
-    
-    while (Serial.available()) {
+    while (Serial.available())
+    {
         char c = Serial.read();
-        switch (bufPos) {
-        case 0:
-            // start byte
-            if (c != START)
-                continue;
-            break;
+        switch (bufPos)
+        {
+            case 0:
+                // start byte
+                if (c != START)
+                    continue;
+                break;
 
-        case 1:
-            // command length
-            if (c < 0x02 || c > 0x0e)
-                continue;
+            case 1:
+                // command length
+                if (c < 0x02 || c > 0x0e)
+                    continue;
 
-            cmdSize = c;
-            break;
+                cmdSize = c;
+                break;
 
-        case 2:
-            // command id
-            for (int i = 0; i < nCommands; i++) {
-                if (commandList[i].id == c) {
-                    // check command size
-                    if (cmdSize != commandList[i].size) {
+            case 2:
+                // command id
+                for (int i = 0; i < nCommands; i++)
+                {
+                    if (commandList[i].id == c)
+                    {
+                        // check command size
+                        if (cmdSize != commandList[i].size)
+                        {
+                        }
+                        cmdFunction = commandList[i].function;
+                        break;
                     }
-                    cmdFunction = commandList[i].function;
-                    break;
                 }
-            }
-            break;
+                break;
         }
-        
+
         buffer[bufPos++] = c;
 
         //String str = (char*)buffer;
         //Serial.println(str);
 
-        if (bufPos == cmdSize + 2) {
+        if (bufPos == cmdSize + 2)
+        {
             //TODO: check CRC
             cmdFunction(buffer);
             bufPos = 0;
@@ -91,7 +97,8 @@ void SerialCommand::sendResponse(uint8_t *cmd, uint8_t length)
 {
     cmd[length - 1] = getCRC(cmd, length - 2);
 
-    for (int i=0; i<length; i++) {
+    for (int i = 0; i < length; i++)
+    {
         Serial.write(cmd[i]);
     }
 }

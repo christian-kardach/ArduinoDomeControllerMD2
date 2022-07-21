@@ -12,21 +12,26 @@
 #include "enums.h"
 
 #if MOTOR_CONTROLLER == BTS7960
-#include "BTS7960Controller.h"
+    #include "BTS7960Controller.h"
+#endif
+#if MOTOR_CONTROLLER == SHIELDMD10
+    #include "SHIELDMD10Controller.h"
 #endif
 
 // Define a pointer to a function for checking controller/flap
 // typedef bool (*interFn)(State st);
 
-class Controller {
-public:
+class Controller
+{
+  public:
     Controller(Motor *motor, int homedSwitch, unsigned long timeout);
     void cw();
     void ccw();
     void abort();
     void update();
     State getState();
-private:
+
+  private:
     void initState();
     Motor *motor;
     State state;

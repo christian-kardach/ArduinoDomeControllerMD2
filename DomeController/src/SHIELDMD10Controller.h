@@ -1,27 +1,24 @@
 #pragma once
 
-#include <Arduino.h>
 #include "configuration.h"
+#include <Arduino.h>
 
-class BTS7960
+class SHIELDMD10
 {
   public:
-    BTS7960(uint8_t EN, uint8_t L_PWM, uint8_t R_PWM) : BTS7960(EN, 0, L_PWM, R_PWM)
+    SHIELDMD10(uint8_t PWM, uint8_t DIR) : SHIELDMD10(PWM, DIR)
     {
     }
-    BTS7960(uint8_t L_EN, uint8_t R_EN, uint8_t L_PWM, uint8_t R_PWM);
-    void Enable();
-    void Disable();
+    SHIELDMD10(uint8_t PWM, uint8_t DIR);
 
     void TurnLeft(uint8_t pwm);
     void TurnRight(uint8_t pwm);
     void Stop();
 
   private:
-    uint8_t _L_EN;
-    uint8_t _R_EN;
-    uint8_t _L_PWM;
-    uint8_t _R_PWM;
+    uint8_t _EN;
+    uint8_t _DIR;
+    uint8_t _PWM;
 };
 
 class Motor
@@ -38,5 +35,5 @@ class Motor
   private:
     bool _isRunning;
     uint8_t _nmotor;
-    BTS7960 *motorController;
+    SHIELDMD10 *motorController;
 };
